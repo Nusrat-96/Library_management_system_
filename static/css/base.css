@@ -1,0 +1,71 @@
+/* ========== base.css ========== */
+
+/* General body styling (applies to all pages) */
+body {
+    color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background only for home page */
+body.home-background {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url("../images/library_image.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* ⚫ Signup page background */
+.about-body {
+    background-color: black;
+    color: white;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    margin-top: 100px;
+}
+
+header h1 {
+    font-weight: bold;
+    color: #f8f9fa;
+}
+
+header p {
+    color: #e0e0e0;
+}
+
+/* Secondary navigation */
+.nav {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.nav a {
+    color: #fff !important;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main content area */
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
