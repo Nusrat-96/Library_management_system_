@@ -1,73 +1,71 @@
-/* static/css/base.css */
-/* ===== Simple Page Styling ===== */
+/* ========== base.css ========== */
 
+/* General body styling (applies to all pages) */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    }
+    color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
+/* Background only for home page */
+body.home-background {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url("../images/library_image.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* ⚫ Signup page background */
+.about-body {
+    background-color: black;
+    color: white;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Header styling */
 header {
-    background-color: #2c3e50;
-    color: white;
-    padding: 15px 0;
     text-align: center;
-    }
+    margin-top: 100px;
+}
 
-nav {
-    background-color: #34495e;
-    padding: 10px;
-    text-align: center;
-    }
+header h1 {
+    font-weight: bold;
+    color: #f8f9fa;
+}
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    }
+header p {
+    color: #e0e0e0;
+}
 
-nav a:hover {
-    text-decoration: underline;
-    }
-
-.container {
-    width: 80%;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
+/* Secondary navigation */
+.nav {
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.messages {
-    margin: 10px auto;
-    width: 80%;
+.nav a {
+    color: #fff !important;
+    font-weight: 500;
 }
 
-.messages li {
-    list-style: none;
-    background: #d1ecf1;
-    color: #0c5460;
-    border: 1px solid #bee5eb;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
+.nav a:hover {
+    text-decoration: underline;
 }
 
-/* for image */
-.bookcover {
-    display: block;           /* Makes margin auto work */
-    margin: 0 auto;           /* Centers horizontally */
-    width: 200px;             /* Adjust width as needed */
-    height: auto;             /* Maintains aspect ratio */
+/* Main content area */
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    padding: 20px;
 }
 
-
+/* Footer */
 footer {
-    text-align: center;
-    padding: 10px;
-    background: #2c3e50;
-    color: white;
-    margin-top: 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
 }

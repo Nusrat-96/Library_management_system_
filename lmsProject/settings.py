@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd Party
+    "crispy_forms", # new
+    "crispy_bootstrap5", # new
     
     #local 
     'accounts.apps.AccountsConfig',
@@ -176,6 +179,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage" # new
+# command to collect static file : python3 manage.py collectstatic
 
 
 # -------------------------------------------------------------------
