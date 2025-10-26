@@ -26,6 +26,32 @@ DEBUG = config("DEBUG_MODE", cast = bool)
 
 ALLOWED_HOSTS = []
 
+# -------------------------------------------------------------------
+# AUTHENTICATION
+# -------------------------------------------------------------------
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+# -------------------------------------------------------------------
+#  To Use Allauth
+# -------------------------------------------------------------------
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+
+ACCOUNT_SESSION_REMEMBER = True     #new
+
+# -------------------------------------------------------------------
+# EMAIL (Console for development)
+# -------------------------------------------------------------------
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 
 # -------------------------------------------------------------------
@@ -42,11 +68,17 @@ INSTALLED_APPS = [
     # 3rd Party
     "crispy_forms", # new
     "crispy_bootstrap5", # new
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     
     #local 
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig'
 ]
+# -------------------------------------------------------------------
+#  To Use Allauth
+# -------------------------------------------------------------------
 
 
 
@@ -62,6 +94,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 
@@ -85,6 +120,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                # `allauth` needs this from django
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -141,25 +177,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-
-# -------------------------------------------------------------------
-# AUTHENTICATION
-# -------------------------------------------------------------------
-AUTH_USER_MODEL = "accounts.CustomUser"
-
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
-
-
-
-# -------------------------------------------------------------------
-# EMAIL (Console for development)
-# -------------------------------------------------------------------
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-
 
 
 # -------------------------------------------------------------------

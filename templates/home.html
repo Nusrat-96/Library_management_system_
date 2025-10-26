@@ -3,6 +3,11 @@
 {% block body_class %}home-background{% endblock body_class %}
 
 {% block content %}
-<h2>Welcome to the Library!</h2>
-<p>Find and borrow books easily.</p>
+
+{% if user.is_authenticated %}
+    <h2>{{ user.username }} — Welcome to the Library!</h2>
+{% else %}
+    <p>Login to find and borrow books easily.</p>
+{% endif %}
+
 {% endblock content %}
