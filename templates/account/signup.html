@@ -7,6 +7,8 @@
     {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
+<div class="form-container">
+  <div class="form-box">
     {% element h1 %}
         {% trans "Sign Up" %}
     {% endelement %}
@@ -46,3 +48,5 @@
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
 {% endblock content %}
+  </div>
+</div>
