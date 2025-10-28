@@ -1,15 +1,48 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 
-{% block body_class %}about-body{% endblock %}  <!-- black background -->
+{% load allauth i18n %}
+{% block body_class %}about-body{% endblock %}
 
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
 {% block content %}
-  <h2>Sign Up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy}}
-    <button class="btn btn-success" type="submit">Sign Up</button>>  
-  </form>
-{% endblock %}
-
-
+    {% element h1 %}
+        {% trans "Sign Up" %}
+    {% endelement %}
+    {% setvar link %}
+        <a href="{{ login_url }}">
+        {% endsetvar %}
+        {% setvar end_link %}
+        </a>
+    {% endsetvar %}
+    {% element p %}
+        {% blocktranslate %}Already have an account? Then please {{ link }}Log In {{ end_link }}.{% endblocktranslate %}
+    {% endelement %}
+    {% if not SOCIALACCOUNT_ONLY %}
+        {% url 'account_signup' as action_url %}
+        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+            {% slot body %}
+                {% csrf_token %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {{ redirect_field }}
+            {% endslot %}
+            {% slot actions %}
+                {% element button tags="prominent,signup" type="submit" %}
+                    {% trans "Sign Up" %}
+                {% endelement %}
+            {% endslot %}
+        {% endelement %}
+    {% endif %}
+    {% if PASSKEY_SIGNUP_ENABLED %}
+        {% element hr %}
+        {% endelement %}
+        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
+            {% trans "Sign up using a passkey" %}
+        {% endelement %}
+    {% endif %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+{% endblock content %}

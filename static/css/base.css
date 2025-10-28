@@ -16,11 +16,41 @@ body.home-background {
     background-size: cover;
 }
 
-/* ⚫ Signup page background */
-.about-body {
-    background-color: black;
-    color: white;
+/* Hide header and nav for about/login pages */
+.about-body header,
+.about-body nav {
+  display: none;
 }
+
+.about-body footer {
+  display: none;
+}
+
+/* Make sure about-body uses full viewport */
+.about-body {
+  background-color: black;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
 
 /* Navbar styling */
 .navbar {

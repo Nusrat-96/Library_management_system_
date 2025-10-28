@@ -15,7 +15,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # -------------------------------------------------------------------
 # SECURITY
 # -------------------------------------------------------------------
@@ -24,7 +23,7 @@ SECRET_KEY = config("THE_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG_MODE", cast = bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # -------------------------------------------------------------------
 # AUTHENTICATION
