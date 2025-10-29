@@ -1,52 +1,80 @@
-{% extends "base.html" %}
+{% extends "base_without_nav.html" %}
+{% load allauth i18n crispy_forms_tags %}
 
-{% load allauth i18n %}
 {% block body_class %}about-body{% endblock %}
 
 {% block head_title %}
-    {% trans "Signup" %}
+{% trans "Signup" %}
 {% endblock head_title %}
+
 {% block content %}
 <div class="form-container">
-  <div class="form-box">
-    {% element h1 %}
+    <div class="form-box">
+
+        {% element h1 %}
         {% trans "Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
+        {% endelement %}
+
+        {% setvar link %}
         <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
+            {% endsetvar %}
+            {% setvar end_link %}
         </a>
-    {% endsetvar %}
-    {% element p %}
+        {% endsetvar %}
+        {% element p %}
         {% blocktranslate %}Already have an account? Then please {{ link }}Log In {{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
+        {% endelement %}
+
+        {% if not SOCIALACCOUNT_ONLY %}
         {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
-                    {% trans "Sign Up" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
-    {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "Sign up using a passkey" %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
+        <form method="post" action="{{ action_url }}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {{ redirect_field }}
+            <button type="submit" class="btn btn-success w-100 mt-3">
+                {% trans "Sign Up" %}
+            </button>
+        </form>
+        {% endif %}
+
+        {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
-  </div>
+        {% endif %}
+
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select all password fields
+        const passwordFields = document.querySelectorAll('input[type="password"]');
+
+        passwordFields.forEach(field => {
+            // Create wrapper div
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('password-wrapper');
+
+            // Insert wrapper before field
+            field.parentNode.insertBefore(wrapper, field);
+            wrapper.appendChild(field);
+
+            // Create eye icon
+            const icon = document.createElement('i');
+            icon.classList.add('fa-solid', 'fa-eye', 'toggle-password');
+            wrapper.appendChild(icon);
+
+            // Add click event
+            icon.addEventListener('click', function () {
+                if (field.type === "password") {
+                    field.type = "text";
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    field.type = "password";
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock content %}

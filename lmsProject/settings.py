@@ -46,6 +46,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 
 ACCOUNT_SESSION_REMEMBER = True     #new
 
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
+}                                                   #new We are using custom signup form 
+
 # -------------------------------------------------------------------
 # EMAIL (Console for development)
 # -------------------------------------------------------------------
@@ -75,10 +79,18 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig'
 ]
+
+
+# To use crispy
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 # -------------------------------------------------------------------
 #  To Use Allauth
 # -------------------------------------------------------------------
-
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
+}                                                   #new We are using custom signup form 
 
 
 # -------------------------------------------------------------------

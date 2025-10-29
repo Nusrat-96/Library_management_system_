@@ -34,14 +34,29 @@ body.home-background {
   width: 100%;
 }
 
-.form-box {
-  background-color: white;
-  padding: 40px;
-  border-radius: 12px;       /* corner roundness */
-  border: 3px solid #ff0000; /* red border color */
-  width: 800px;
+/* Align all form fields nicely inside the form box */
+.form-box form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* aligns labels and inputs on the left */
+}
+
+.form-box label {
+  font-weight: 700;
+  margin-bottom: 6px;
   color: #000;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%; /* all fields same width */
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 
@@ -91,4 +106,27 @@ header p {
 footer {
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
+}
+
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 35px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+.toggle-password:hover {
+  color: #000;
 }
