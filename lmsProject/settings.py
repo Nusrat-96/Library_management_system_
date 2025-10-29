@@ -15,7 +15,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # -------------------------------------------------------------------
 # SECURITY
 # -------------------------------------------------------------------
@@ -24,7 +23,37 @@ SECRET_KEY = config("THE_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG_MODE", cast = bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]   #new 
+
+# -------------------------------------------------------------------
+# AUTHENTICATION
+# -------------------------------------------------------------------
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+# -------------------------------------------------------------------
+#  To Use Allauth
+# -------------------------------------------------------------------
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+
+ACCOUNT_SESSION_REMEMBER = True     #new
+
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
+}                                                   #new We are using custom signup form 
+
+# -------------------------------------------------------------------
+# EMAIL (Console for development)
+# -------------------------------------------------------------------
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 
@@ -40,8 +69,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd Party
-    "crispy_forms", # new
-    "crispy_bootstrap5", # new
+    'crispy_forms', # new
+    'crispy_bootstrap5', # new
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     
     #local 
     'accounts.apps.AccountsConfig',
@@ -49,6 +81,29 @@ INSTALLED_APPS = [
 ]
 
 
+# To use crispy
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# -------------------------------------------------------------------
+#  To Use Allauth
+# -------------------------------------------------------------------
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
+}                                                   #new We are using custom signup form 
+
+""" old Version
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = "email" # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+"""
+""" To make Emain mendatory 
+ACCOUNT_LOGIN_METHODS = {"email"}
+
+ACCOUNT_UNIQUE_EMAIL = True  # <— ensures unique email
+ACCOUNT_EMAIL_VERIFICATION = "optional"  # or "mandatory" if you want email confirmation
+"""
 
 # -------------------------------------------------------------------
 # MIDDLEWARE
@@ -62,6 +117,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 
@@ -85,6 +143,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                # `allauth` needs this from django
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -141,25 +200,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-
-# -------------------------------------------------------------------
-# AUTHENTICATION
-# -------------------------------------------------------------------
-AUTH_USER_MODEL = "accounts.CustomUser"
-
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
-
-
-
-# -------------------------------------------------------------------
-# EMAIL (Console for development)
-# -------------------------------------------------------------------
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-
 
 
 # -------------------------------------------------------------------

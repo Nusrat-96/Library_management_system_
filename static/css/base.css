@@ -16,10 +16,59 @@ body.home-background {
     background-size: cover;
 }
 
-/* ⚫ Signup page background */
+/* Hide header and nav for about/login pages */
+
+/* Make sure about-body uses full viewport */
 .about-body {
-    background-color: black;
-    color: white;
+  background-color: black;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Align all form fields nicely inside the form box */
+/* ✅ The actual white box */
+.form-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 450px; /* Adjust as you like */
+  text-align: left;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #000;
+}
+
+/* Make labels & inputs neat */
+.form-box form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-box label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 /* Navbar styling */
@@ -68,4 +117,27 @@ header p {
 footer {
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
+}
+
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 35px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+.toggle-password:hover {
+  color: #000;
 }
