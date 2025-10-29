@@ -23,7 +23,7 @@ SECRET_KEY = config("THE_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG_MODE", cast = bool)
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]   #new 
 
 # -------------------------------------------------------------------
 # AUTHENTICATION
@@ -69,8 +69,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd Party
-    "crispy_forms", # new
-    "crispy_bootstrap5", # new
+    'crispy_forms', # new
+    'crispy_bootstrap5', # new
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -92,6 +92,18 @@ ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
 }                                                   #new We are using custom signup form 
 
+""" old Version
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = "email" # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+"""
+""" To make Emain mendatory 
+ACCOUNT_LOGIN_METHODS = {"email"}
+
+ACCOUNT_UNIQUE_EMAIL = True  # <— ensures unique email
+ACCOUNT_EMAIL_VERIFICATION = "optional"  # or "mandatory" if you want email confirmation
+"""
 
 # -------------------------------------------------------------------
 # MIDDLEWARE

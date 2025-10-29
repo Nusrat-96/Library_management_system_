@@ -32,33 +32,44 @@ body.home-background {
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
 }
 
 /* Align all form fields nicely inside the form box */
+/* ✅ The actual white box */
+.form-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 450px; /* Adjust as you like */
+  text-align: left;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #000;
+}
+
+/* Make labels & inputs neat */
 .form-box form {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* aligns labels and inputs on the left */
+  align-items: stretch;
 }
 
 .form-box label {
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-weight: 600;
+  margin-bottom: 5px;
   color: #000;
 }
 
 .form-box input,
 .form-box select,
 .form-box textarea {
-  width: 100%; /* all fields same width */
-  max-width: 100%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
-
 
 /* Navbar styling */
 .navbar {
