@@ -93,6 +93,10 @@ ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
 }                                                   #new We are using custom signup form 
 
+
+#--------------------------------------------------------------------
+#Email Related 
+#--------------------------------------------------------------------
 """ old Version
 ACCOUNT_USERNAME_REQUIRED = False # new
 ACCOUNT_AUTHENTICATION_METHOD = "email" # new
@@ -105,6 +109,8 @@ ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_UNIQUE_EMAIL = True  # <— ensures unique email
 ACCOUNT_EMAIL_VERIFICATION = "optional"  # or "mandatory" if you want email confirmation
 """
+# To send message from the email of the website instead From: webmaster@localhost
+DEFAULT_FROM_EMAIL = "admin@librarymanagement.com"   # new
 
 # -------------------------------------------------------------------
 # MIDDLEWARE
