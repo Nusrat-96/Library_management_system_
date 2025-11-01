@@ -16,17 +16,6 @@ body.home-background {
     background-size: cover;
 }
 
-/* Hide header and nav for about/login pages */
-
-/* Make sure about-body uses full viewport */
-.about-body {
-  background-color: black;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .form-container {
   display: flex;
   justify-content: center;
@@ -140,4 +129,48 @@ footer {
 
 .toggle-password:hover {
   color: #000;
+}
+
+
+/* Hide header and nav for about/login pages */
+
+/* Make sure about-body uses full viewport */
+
+/* ===== Page spacing fixes for about-body (like confirm email, login, etc.) ===== */
+.about-body {
+  background-color: black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px; /* small gap from top */
+}
+
+.about-body header {
+  margin-top: 0 !important; /* remove big gap */
+  margin-bottom: 30px; /* space between heading and form */
+}
+
+.about-body .page-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* keep it slightly below header */
+  width: 100%;
+}
+
+.about-body .form-container {
+  min-height: auto; /* don’t force full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+/* For small device like mobile */
+@media (max-width: 768px) {
+  .about-body {
+    padding-top: 20px;
+  }
+  .about-body header {
+    margin-bottom: 20px;
+  }
 }

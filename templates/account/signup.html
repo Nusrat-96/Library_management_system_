@@ -1,50 +1,52 @@
 {% extends "base_without_nav.html" %}
-{% load allauth i18n crispy_forms_tags %}
-{% load static %}
+{% load i18n static crispy_forms_tags %}
 
 {% block body_class %}about-body{% endblock %}
-
 {% block head_title %}
-{% trans "Signup" %}
+    {% trans "Change Password" %}
 {% endblock head_title %}
 
 {% block content %}
 <div class="form-container">
     <div class="form-box">
+        <h1>
+            {% if token_fail %}
+                {% trans "Bad Token" %}
+            {% else %}
+                {% trans "Change Password" %}
+            {% endif %}
+        </h1>
 
-        {% element h1 %}
-        {% trans "Sign Up" %}
-        {% endelement %}
+        {% if token_fail %}
+            {% url 'account_reset_password' as passwd_reset_url %}
+            <p>
+                {% blocktrans %}The password reset link was invalid, possibly because it has already been used. Please request a <a href="{{ passwd_reset_url }}">new password reset</a>.{% endblocktrans %}
+            </p>
+        {% else %}
+            <form method="post" action="{{ action_url }}">
+                {% csrf_token %}
+                {{ redirect_field }}
 
-        {% setvar link %}
-        <a href="{{ login_url }}">
-            {% endsetvar %}
-            {% setvar end_link %}
-        </a>
-        {% endsetvar %}
-        {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}Log In {{ end_link }}.{% endblocktranslate %}
-        {% endelement %}
+                <!-- Render the form using crispy filter -->
+                {{ form|crispy }}
 
-        {% if not SOCIALACCOUNT_ONLY %}
-        {% url 'account_signup' as action_url %}
-        <form method="post" action="{{ action_url }}">
-            {% csrf_token %}
-            {{ form|crispy }}
-            {{ redirect_field }}
-            <button type="submit" class="btn btn-success w-100 mt-3">
-                {% trans "Sign Up" %}
-            </button>
-        </form>
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" class="btn btn-primary">{% trans "Change Password" %}</button>
+                    <button type="submit" form="logout-from-stage" class="btn btn-secondary">{% trans "Cancel" %}</button>
+                </div>
+            </form>
         {% endif %}
 
-        {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        {% if not cancel_url %}
+            <form id="logout-from-stage" method="post" action="{% url 'account_logout' %}">
+                <input type="hidden" name="next" value="{% url 'account_login' %}">
+                {% csrf_token %}
+            </form>
         {% endif %}
-
     </div>
 </div>
 
+<!-- Password toggle JS -->
 <script src="{% static 'js/password_toggle.js' %}"></script>
-
 {% endblock content %}
