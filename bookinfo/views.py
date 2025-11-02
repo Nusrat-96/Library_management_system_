@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import (LoginRequiredMixin, 
+                                        UserPassesTestMixin, 
+                                        PermissionRequiredMixin
+                                        )
+
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin  # Correct import
 from django.urls import reverse_lazy, reverse
@@ -107,11 +111,12 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context = self.get_context_data(form=form)
         return self.render_to_response(context)"""
         
-class BookDetailView(DetailView):
+class BookDetailView(PermissionRequiredMixin, DetailView):
     model = Book
     context_object_name = "book"
     template_name = "book/book_detail.html"
     login_url = "account_login"
+    permission_required = "bookinfo.special_status"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

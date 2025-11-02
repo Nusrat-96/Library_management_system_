@@ -30,6 +30,11 @@ class Book(models.Model):
     num_of_copies = models.IntegerField(default=1)
     num_of_time_borrowed = models.IntegerField(default=0)
     last_borrowed_date = models.DateTimeField(null=True, blank=True)
+    
+    class Meta: # new
+        permissions = [
+        ("special_status", "Can read all books"),
+        ]
 
     def save(self, *args, **kwargs):
         self.is_available = self.num_of_copies > 1
