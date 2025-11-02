@@ -24,14 +24,55 @@
 
         <div class="review-section">
             <h3>Reviews</h3>
-            <ul>
+            <ul class="review-list">
                 {% for review in book.reviews.all %}
-                    <li>{{ review.review }} — <em>{{ review.author }}</em></li>
+                    <li class="review-item">
+                        <p class="review-author"><em>{{ review.author }}</em></p>
+                        <p class="review-time">{{ review.created_at|date:"F j, Y, g:i a" }}</p>
+
+                        {% if request.user == review.author and edit_review_id == review.id %}
+                            <!-- In-place edit form -->
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.review }}
+                                <button type="submit">Save</button>
+                                <a href="{% url 'book_detail' book.pk %}" class="btn btn-sm btn-secondary">Cancel</a>
+                            </form>
+                        {% else %}
+                            <p class="review-text">{{ review.review }}</p>
+
+                            {% if request.user == review.author %}
+                                <p>
+                                    <a href="?edit={{ review.id }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'review_delete' review.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                </p>
+                            {% elif request.user.is_superuser %}
+                                <p>
+                                    <a href="{% url 'review_delete' review.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    </li>
                 {% empty %}
                     <li>No reviews yet.</li>
                 {% endfor %}
             </ul>
         </div>
+
+
+        <hr>
+
+        {% if user.is_authenticated %}
+        <div class="add-review">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+        {% else %}
+        <p><a href="{% url 'account_login' %}">Log in</a> to add a review.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

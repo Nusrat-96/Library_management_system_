@@ -1,0 +1,9 @@
+{% extends "base_without_nav.html" %}
+{% block body_class %}about-body{% endblock %}
+<h3>Add Review for {{ object.book.title }}</h3>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+</form>

@@ -220,19 +220,38 @@ footer {
 
 /* Reviews block */
 .review-section {
-  margin-top: 8px;
+    margin-top: 20px;
+    padding: 10px;
 }
 
-.review-section h3 {
-  margin: 0 0 8px 0;
-  color: #f8f9fa;
+.review-list {
+    list-style-type: none;
+    padding-left: 0;
 }
 
-.review-section ul {
-  margin: 0;
-  padding-left: 20px;
-  color: #dcdcdc;
+.review-item {
+    margin-bottom: 15px;
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
 }
+
+.review-author {
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.review-time {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.review-text {
+    font-size: 1em;
+    margin-left: 10px;
+}
+
 
 /* Responsive: stack vertically on small screens */
 @media (max-width: 768px) {

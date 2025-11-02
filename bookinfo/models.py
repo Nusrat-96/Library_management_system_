@@ -15,7 +15,7 @@ class Book(models.Model):
     
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     cover = models.ImageField(upload_to="covers/", blank=True)
 
     year_published = models.IntegerField()
@@ -32,7 +32,7 @@ class Book(models.Model):
     last_borrowed_date = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        self.is_available = self.num_of_copies > 0
+        self.is_available = self.num_of_copies > 1
         super().save(*args, **kwargs)
 
     def __str__(self):
