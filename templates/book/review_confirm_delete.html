@@ -1,0 +1,17 @@
+{% extends "base_without_nav.html" %}
+{% block body_class %}about-body{% endblock %}
+{% block content %}
+<h1>Delete</h1>
+<form action="" method="post">{% csrf_token %}
+    <p>
+        Are you sure you want to delete your review for - "{{ object.book.title }}"? <br>
+        Written by 
+        {% if request.user == object.author %}
+            You
+        {% else %}
+            {{ object.author }}
+        {% endif %}
+    </p>
+    <button class="btn btn-danger ms-2" type="submit">Confirm</button>
+</form>
+{% endblock content %}
