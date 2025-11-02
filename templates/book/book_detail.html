@@ -1,0 +1,37 @@
+{% extends "base_without_nav.html" %}
+{% block body_class %}about-body{% endblock %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+{% block content %}
+<div class="book-detail">
+    {% if book.cover %}
+        <img class="bookcover" src="{{ book.cover.url }}" alt="{{ book.title }}">
+    {% endif %}
+
+    <div class="book-info">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Price:</strong> {{ book.price }}</p>
+        <p><strong>Is Available:</strong>
+            {% if book.is_available %}
+                Yes
+            {% else %}
+                No 
+            {% endif %}
+                
+        </p>
+
+        <div class="review-section">
+            <h3>Reviews</h3>
+            <ul>
+                {% for review in book.reviews.all %}
+                    <li>{{ review.review }} — <em>{{ review.author }}</em></li>
+                {% empty %}
+                    <li>No reviews yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

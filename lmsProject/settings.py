@@ -78,7 +78,8 @@ INSTALLED_APPS = [
     
     #local 
     'accounts.apps.AccountsConfig',
-    'pages.apps.PagesConfig'
+    'pages.apps.PagesConfig',
+    'bookInfo'
 ]
 
 
@@ -228,6 +229,11 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage" # new
 # command to collect static file : python3 manage.py collectstatic
 
+# -------------------------------------------------------------------
+# MEDIA FILES
+# -------------------------------------------------------------------
+MEDIA_URL = "/media/" 
+MEDIA_ROOT = BASE_DIR / "media"
 
 # -------------------------------------------------------------------
 # DEFAULT PRIMARY KEY
