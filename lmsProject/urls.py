@@ -31,7 +31,7 @@ urlpatterns = [
     # Local apps
     path("accounts/", include("accounts.urls")), # new
     path("", include("pages.urls")),
-    path('books/', include('bookInfo.urls')),
+    path('books/', include('bookinfo.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # ----------- Serve static files in development -----------
