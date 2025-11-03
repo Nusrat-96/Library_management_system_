@@ -6,4 +6,5 @@ urlpatterns = [
     path("<uuid:pk>", views.BookDetailView.as_view(), name="book_detail"),
     path("review/<int:pk>/edit/", views.ReviewUpdateView.as_view(), name="review_edit"),
     path("review/<int:pk>/delete/", views.ReviewDeleteView.as_view(), name="review_delete"),
+    path("search/",views.SearchListView.as_view(), name="search_result"),
 ]
