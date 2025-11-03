@@ -63,3 +63,8 @@ class Review(models.Model):
         return reverse("book_detail", kwargs={"pk": self.book.pk})
 
 
+#----------------------------------------------------------
+# BorrowBook
+#----------------------------------------------------------
+"""class BorrowRecord(models.Model):
+    pass"""

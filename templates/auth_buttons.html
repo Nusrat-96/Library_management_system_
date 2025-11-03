@@ -17,12 +17,13 @@
     {% if user.is_authenticated %}
 
         <li class="nav-item">
-            <form action="#" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-link nav-link" style="padding: 0; text-decoration: none;">
-                    {{ user.username }} || 
-                </button>
-            </form>
+            {% if user.member %}
+                <a class="nav-link" href="{% url 'profile_detail' user.member.pk %}">
+                    {{ user.username }} ||  
+                </a>
+                {% else %}
+                <span>{{ user.username }} ||  </span>
+            {% endif %}
         </li>
 
         <li class="nav-item">
