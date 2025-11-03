@@ -1,0 +1,26 @@
+{% extends "base_without_nav.html" %}
+{% block body_class %} about-body {% endblock %}
+
+{% block title %} Search Result {% endblock title%}
+
+{% block content %}
+<div class="container mt-4 text-light">
+    <h2>Search Results</h2>
+    <hr>
+
+    {% if book_list %}
+        <ul class="list-group">
+            {% for book in book_list %}
+                <li class="list-group-item">
+                    <a href="{{book.get_absolute_url}}">
+                        <strong>{{ book.title }}</strong> by {{ book.author }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No books found matching your search.</p>
+    {% endif %}
+</div>
+{% endblock content %}

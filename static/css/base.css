@@ -275,3 +275,20 @@ footer {
     width: 100%;
   }
 }
+
+
+/* Compact search bar next to logo */
+.search-bar {
+  max-width: 200px;
+}
+
+.search-bar .form-control {
+  height: 30px;
+  font-size: 0.85rem;
+  padding: 2px 6px;
+}
+
+.search-bar .btn {
+  padding: 2px 8px;
+  font-size: 0.85rem;
+}

@@ -1,3 +1,17 @@
+<!-- Compact Search Bar -->
+<form class="d-flex ms-3 search-bar" method="get" action="{% url 'search_result' %}">
+    <input
+        class="form-control form-control-sm me-2"
+        type="search"
+        name="q"
+        placeholder="Search Book"
+        aria-label="Search"
+    >
+    <button class="btn btn-sm btn-outline-success" type="submit">
+        <i class="fas fa-search"></i>
+    </button>
+</form>
+
 <ul class="navbar-nav ms-auto mb-2 mb-md-0">
 
     {% if user.is_authenticated %}

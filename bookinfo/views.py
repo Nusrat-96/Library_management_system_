@@ -10,7 +10,7 @@ from django.views.generic.detail import SingleObjectMixin  # Correct import
 from django.urls import reverse_lazy, reverse
 from .models import Book, Review
 from .forms import ReviewForm
-
+from django.db.models import Q
 
 # ----------------------------------------------------------
 # 1️⃣ Book List
@@ -158,3 +158,22 @@ class BookDetailView(PermissionRequiredMixin, DetailView):
 
         context = self.get_context_data(form=form)
         return self.render_to_response(context)
+    
+    # ----------------------------------------------------------
+# Search Book
+# ----------------------------------------------------------
+class SearchListView(ListView):
+    model = Book
+    context_object_name = "book_list"
+    template_name = "book/book_search.html"
+    
+    #get request to search book
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        
+        if query:
+            return Book.objects.filter(
+                Q(title__icontains=query) | Q(author__icontains = query)
+            ).distinct()
+            
+        return Book.objects.none()
