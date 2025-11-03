@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'bookinfo.apps.BookinfoConfig',
+    'members.apps.MembersConfig',
 ]
 
 
