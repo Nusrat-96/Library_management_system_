@@ -6,4 +6,4 @@ class MembersConfig(AppConfig):
     name = 'members'
 
     def ready(self):
-        import members.signals  # <-- this must be inside the class
+        import members.signals  # whenever sign in a member profile will create automatically

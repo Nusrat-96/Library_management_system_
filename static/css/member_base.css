@@ -1,0 +1,14 @@
+.member-body {
+    background-color: #1b1b2f;
+    color: white;
+    min-height: 100vh;
+}
+
+.member-header {
+    border-bottom: 2px solid #4e9cff;
+}
+
+a.btn,
+button.btn {
+    border-radius: 5px !important;
+}
