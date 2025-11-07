@@ -12,36 +12,50 @@
     </button>
 </form>
 
-<ul class="navbar-nav ms-auto mb-2 mb-md-0">
+<ul class="navbar-nav ms-auto">
 
     {% if user.is_authenticated %}
+    
+        <!-- Show Username with Optional Profile Link -->
+        <li class="nav-item d-flex align-items-center me-3">
 
-        <li class="nav-item">
-            {% if user.member %}
-                <a class="nav-link" href="{% url 'profile_detail' user.member.pk %}">
-                    {{ user.username }} ||  
-                </a>
+            {% if user.is_authenticated %}
+                {% if user.member %}
+                    <a href="{% url 'profile_detail' user.member.pk %}" class="nav-username nav-link p-0">
+                        <i class="fa-solid fa-user"></i> {{ user.username }}
+                    </a>
                 {% else %}
-                <span>{{ user.username }} ||  </span>
+                    <span class="nav-username">
+                        <i class="fa-solid fa-user"></i> {{ user.username }}
+                    </span>
+                {% endif %}
             {% endif %}
+
         </li>
 
+        <!-- Logout Button -->
         <li class="nav-item">
-            <form action="{% url 'account_logout' %}" method="post" style="display:inline;">
+            <form action="{% url 'account_logout' %}" method="post" class="d-inline">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-link nav-link" style="padding: 0; text-decoration: none;">
-                    Log Out
-                </button>
+                <button class="btn btn-outline-light btn-sm logout-btn">Logout</button>
             </form>
         </li>
 
     {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
-        </li>
-    {% endif %}
 
+        <!-- Login -->
+        <li class="nav-item me-2">
+            <a class="btn btn-outline-light btn-sm" href="{% url 'account_login' %}">
+                Login
+            </a>
+        </li>
+
+        <!-- Signup -->
+        <li class="nav-item">
+            <a class="btn btn-primary btn-sm" href="{% url 'account_signup' %}">
+                Sign Up
+            </a>
+        </li>
+
+    {% endif %}
 </ul>

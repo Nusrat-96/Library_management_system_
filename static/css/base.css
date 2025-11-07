@@ -108,6 +108,44 @@ footer {
     color: #fff;
 }
 
+/* Improve navbar look */
+.navbar {
+    background-color: #0b1437 !important;
+    padding: 10px 20px;
+}
+
+/* Style username text */
+.nav-username {
+    color: #d7e3ff;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Logout button */
+.logout-btn {
+    border-radius: 20px;
+    padding: 4px 14px;
+    transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Login / Signup buttons */
+.navbar .btn-outline-light {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.9rem;
+}
+
+.navbar .btn-primary {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.9rem;
+}
+
 
 .password-wrapper {
   position: relative;

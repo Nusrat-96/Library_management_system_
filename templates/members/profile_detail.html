@@ -1,14 +1,44 @@
 <!-- templates/members/profile_detail.html -->
-{% extends "base.html" %}
+{% extends "members/base_member.html" %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <h2>{{ member.name }}’s Profile</h2>
-    <p><strong>Username:</strong> {{ member.user.username }}</p>
-    <p><strong>Email:</strong> {{ member.user.email }}</p>
-    <p><strong>Phone:</strong> {{ member.phone }}</p>
-    <p><strong>Address:</strong> {{ member.address }}</p>
-    <p><strong>Gender:</strong> {{ member.get_gender_display }}</p>
-    <p><strong>Membership Type:</strong> {{ member.get_membership_type_display }}</p>
-    <img src="{{ member.profile_picture.url }}" alt="Profile picture" width="120">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+<div class="profile-container">
+
+    <!-- Left: Profile Picture -->
+     
+    <div class="profile-photo">
+        {% if member.profile_picture %}
+            <img src="{{ member.profile_picture.url }}" alt="Profile Picture">
+        {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture">
+        {% endif %}
+    </div>
+
+    <!-- Right: Profile Information -->
+    <div class="profile-info">
+        <h2>{{ member.name }}</h2>
+        <p class="username">@{{ member.user.username }}</p>
+
+        <div class="info-block">
+            <p><strong>Phone:</strong> {{ member.phone }}</p>
+            <p><strong>Email:</strong> {{ member.user.email }}</p>
+            <p><strong>Gender:</strong> {{ member.get_gender_display }}</p>
+            <p><strong>Membership:</strong> {{ member.get_membership_category_display }}</p>
+            <p><strong>Date of Birth:</strong> {{ member.date_of_birth }}</p>
+            <p><strong>Address:</strong> {{ member.address }}</p>
+            <p><strong>Books Read:</strong> {{ member.number_of_book_read }}</p>
+        </div>
+
+        <!-- Edit Button -->
+        {% if request.user == member.user %}
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary mt-3">Edit Profile</a>
+        {% endif %}
+    </div>
 </div>
+
 {% endblock %}
